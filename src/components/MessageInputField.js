@@ -2,7 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  root: {},
+  root: {
+    gridRow: 2,
+  },
 });
 
 const MessageInputField = () => {
