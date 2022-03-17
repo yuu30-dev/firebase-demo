@@ -1,5 +1,13 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue,
+  query,
+  orderByKey,
+  limitToFirst,
+} from 'firebase/database';
 
 const {
   REACT_APP_FIREBASE_API_KEY,
@@ -22,8 +30,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const messageRef = ref(getDatabase(app), 'messages');
+const db = getDatabase(app);
+const messagesRef = ref(db, 'messages');
 
 export const pushMessage = ({ name, text }) => {
-  push(messageRef, { name, text });
+  push(messagesRef, { name, text });
+};
+
+export const listenMessages = (callback) => {
+  return onValue(query(messagesRef, orderByKey(), limitToFirst(5)), callback);
 };
