@@ -6,7 +6,7 @@ import {
   onValue,
   query,
   orderByKey,
-  limitToFirst,
+  limitToLast,
 } from 'firebase/database';
 
 const {
@@ -38,5 +38,5 @@ export const pushMessage = ({ name, text }) => {
 };
 
 export const listenMessages = (callback) => {
-  return onValue(query(messagesRef, orderByKey(), limitToFirst(15)), callback);
+  return onValue(query(messagesRef, orderByKey(), limitToLast(15)), callback);
 };
