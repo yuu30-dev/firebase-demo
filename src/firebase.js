@@ -38,5 +38,5 @@ export const pushMessage = ({ name, text }) => {
 };
 
 export const listenMessages = (callback) => {
-  return onValue(query(messagesRef, orderByKey(), limitToFirst(5)), callback);
+  return onValue(query(messagesRef, orderByKey(), limitToFirst(15)), callback);
 };
