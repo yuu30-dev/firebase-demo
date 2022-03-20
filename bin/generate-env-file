@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const {
+  apiKey,
+  authDomain,
+  databaseURL,
+  projectId,
+  storageBucket,
+  messagingSenderId,
+  appId
+} = require('../.firebase-config');
+
+const ENV_LOCAL = `
+REACT_APP_FIREBASE_API_KEY='${apiKey}'
+REACT_APP_FIREBASE_AUTH_DOMAIN='${authDomain}'
+REACT_APP_FIREBASE_DATABASE_URL='${databaseURL}'
+REACT_APP_FIREBASE_PROJECT_ID='${projectId}'
+REACT_APP_FIREBASE_STORAGE_BUCKET='${storageBucket}'
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID='${messagingSenderId}'
+REACT_APP_FIREBASE_APP_ID='${appId}'
+`;
+
+const TRIMED_ENV_LOCAL = ENV_LOCAL.trim();
+const env_file_name = '.env.local';
+
+try {
+  fs.writeFileSync(env_file_name, TRIMED_ENV_LOCAL);
+  console.log(`Congrats! ${env_file_name} was successfully generated!`);
+} catch(e) {
+  console.log(e);
+}
